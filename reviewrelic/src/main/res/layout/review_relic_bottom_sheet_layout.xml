@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="RtlCompat">
+
+    <data>
+
+        <variable
+            name="settings"
+            type="com.review.relic.dto.ReviewRelicSettingsResponse" />
+
+        <variable
+            name="thankYouMessage"
+            type="String" />
+
+        <variable
+            name="viewModel"
+            type="com.review.relic.viewmodel.ReviewRelicSheetViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_white_top_rounded">
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/groupMainView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="nestedScroll,ivArrowDown" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/groupThankYou"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="imageViewAnimation,textViewThankYou" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/groupLoading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="circularProgress" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_white_top_rounded"
+                android:padding="10dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/btnCross"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:tint="@color/default_color"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_cross" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_centerInParent="true"
+                    android:foregroundGravity="center"
+                    app:cardCornerRadius="50dp"
+                    app:cardElevation="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btnCross">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imageViewLogo"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop" />
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textViewTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/review_relic_bottom_sheet_spacing"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="center"
+                    android:text="@{settings.name}"
+                    android:textColor="@android:color/black"
+                    android:textSize="22sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView"
+                    tools:text="Title" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textViewSubTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/review_relic_bottom_sheet_spacing"
+                    android:fontFamily="@font/poppins_light"
+                    android:gravity="center"
+                    android:text="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewItems"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginVertical="@dimen/review_relic_bottom_sheet_spacing"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"
+                    app:layout_constraintBottom_toTopOf="@+id/editTextReview"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="wrap"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewSubTitle"
+                    tools:listitem="@layout/review_item_layout" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/editTextReview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/review_relic_bottom_sheet_spacing_double"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/review_text_bg"
+                    android:fontFamily="@font/poppins_light"
+                    android:gravity="top|start"
+                    android:hint="@string/review"
+                    android:inputType="textMultiLine"
+                    android:lines="2"
+                    android:maxLines="2"
+                    android:padding="10dp"
+                    android:text="@={viewModel.comments}"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@color/grey_border_color"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toTopOf="@+id/buttonSubmitReview"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/buttonSubmitReview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginVertical="50dp"
+                    android:layout_marginTop="@dimen/review_relic_bottom_sheet_spacing_double"
+                    android:enabled="false"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="center"
+                    android:paddingVertical="20dp"
+                    android:text="@string/submit_review"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toTopOf="@+id/textViewPoweredBy"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textViewPoweredBy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:fontFamily="@font/poppins_light"
+                    android:text="@string/powered_by"
+                    android:textColor="@android:color/black"
+                    android:textSize="13sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/appCompatTextView5"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/appCompatTextView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:drawableStart="@drawable/icon"
+                    android:drawablePadding="5dp"
+                    android:fontFamily="@font/poppins_light"
+                    android:text="@string/review_relic"
+                    android:textColor="@android:color/black"
+                    android:textSize="13sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textViewPoweredBy"
+                    app:layout_constraintTop_toTopOf="@+id/textViewPoweredBy" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <ImageView
+            android:id="@+id/ivArrowDown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/review_relic_bottom_sheet_spacing"
+            android:layout_marginBottom="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_arrow_down" />
+
+        <ImageView
+            android:id="@+id/imageViewAnimation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/review_relic_bottom_sheet_spacing"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/tick_animation" />
+
+        <TextView
+            android:id="@+id/textViewThankYou"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/review_relic_bottom_sheet_spacing"
+            android:fontFamily="@font/poppins_medium"
+            android:gravity="center"
+            android:text="@{viewModel.thankYouMessage != null ? viewModel.thankYouMessage : @string/thank_you}"
+            android:textSize="18sp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewAnimation"
+            tools:text="Thank you" />
+
+        <ProgressBar
+            android:id="@+id/circularProgress"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

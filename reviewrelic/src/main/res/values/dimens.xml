@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_15">15dp</dimen>
+    <dimen name="review_relic_item_corner_radius">30dp</dimen>
+    <dimen name="review_relic_item_stroke_width">1dp</dimen>
+    <dimen name="review_relic_bottom_sheet_spacing">10dp</dimen>
+    <dimen name="review_relic_bottom_sheet_spacing_double">10dp</dimen>
+</resources>

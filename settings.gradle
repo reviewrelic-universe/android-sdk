@@ -1,0 +1,3 @@
+include ':reviewrelic'
+include ':sample'
+rootProject.name = "ReviewRelic"

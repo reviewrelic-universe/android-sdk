@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="reviewRelicItem"
+            type="com.review.relic.dto.ReviewRelicSettingsResponse.ReviewSetting" />
+
+        <variable
+            name="isSelected"
+            type="Boolean" />
+
+        <variable
+            name="showImage"
+            type="Boolean" />
+
+        <variable
+            name="imageBitmapEmpty"
+            type="android.graphics.Bitmap" />
+
+        <variable
+            name="imageBitmapFilled"
+            type="android.graphics.Bitmap" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp">
+
+        <androidx.appcompat.widget.AppCompatCheckedTextView
+            android:id="@+id/textViewItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/review_item_text_bg"
+            android:checked="@{isSelected}"
+            android:fontFamily="@font/poppins_light"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
+            android:textSize="18sp"
+            android:text="@{reviewRelicItem.label}"
+            android:textColor="@color/review_item_color_selector"
+            android:visibility="@{showImage ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:checked="true"
+            tools:text="Good Review"
+            tools:visibility="visible" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageViewReview"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:visibility="@{showImage ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            bind:imageBitmap="@{isSelected ? imageBitmapFilled : imageBitmapEmpty}"
+            tools:visibility="gone" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
