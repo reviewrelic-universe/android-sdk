@@ -40,7 +40,7 @@ We include the INTERNET permission by default as we need it to make network requ
 ```
 ## Code Initialization
 
-To initialize the Review Relic SDK in your app, use below snippet in your app's Application class or where ever you seems appropiaate:
+To initialize the Review Relic SDK in your app, use below snippet in your app's Application class or where ever you seems appropiate:
 
 #### Initialize SDK
 
@@ -50,8 +50,21 @@ ReviewRelic
     .setToken("") /* Token obtained from admin panel of review relic */
     .setMerchantId("") /* Merchant Id obtained from admin panel of review relic */
     .enableLogging() /* Set to true if you want to see logs */
+    .setInitializeListener() /* Callback for successful initialization of SDK */
     .build()
 ```
+
+###### Attributes
+
+Following are functions you need to call for SDK initialization:
+
+| Attribute | Function |  Description | Type | Required | Default value |
+|:---|:---|:---|:---|:---|:---|
+| secretKey | setSecretKey() |Set the environment API key | String | Yes | Should be non-null |
+| token | setToken() | Set the environment Token | String | Yes| Should be non-null |
+| merchantId | setMerchantId() | Set the merchant ID | String| Yes | Should be non-null |
+| logging | enableLogging() | Toggle logging for SDK | Boolean| No | false |
+| onInitializedListener | setInitializeListener() | Listener for successful intializaiton of SDK | ReviewRelicOnInitializedListener | No | Null |
 
 #### Show Sheet
 
@@ -59,7 +72,18 @@ ReviewRelic
 ReviewRelic.showSheet(
     transactionId = "",  /*Test Transaction Id*/
     thankYouMessage = "", /*Test Thank you message*/
-    fragmentManager = null /* Pass fragment manager from your Activity/Fragment */
+    fragmentManager = , /* Pass fragment manager from your Activity/Fragment */
+    onSubmitCallback = {} /* Callback for successfully submitting review */
 )
 ```
+###### Attributes
+
+Following are parameters the details for showing sheet:
+
+| Parameters  |  Description | Type | Required | Default value |
+|:---|:---|:---|:---|:---|
+| transactionId | Transaction Id for your review | String | No | null
+| thankYouMessage | Thank you message you want to show  | String | No | "Thank you" |
+| fragmentManager | Pass fragment manager from your Activity/Fragment | FragmentManager | Yes | Should be non-null |
+| onSubmitCallback | Callback for successfully submitting review | | No
 
