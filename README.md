@@ -47,7 +47,8 @@ To initialize the Review Relic SDK in your app, use below snippet in your app's 
 ```kotlin
 ReviewRelic
     .setSecretKey("") /* Secret key obtained from admin panel of review relic */
-    .setToken("") /* Token obtained from admin panel of review relic */            .setMerchantId("") /* Merchant Id obtained from admin panel of review relic */
+    .setToken("") /* Token obtained from admin panel of review relic */
+    .setMerchantId("") /* Merchant Id obtained from admin panel of review relic */
     .enableLogging() /* Set to true if you want to see logs */
     .build()
 ```
