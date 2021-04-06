@@ -96,6 +96,7 @@ class ReviewRelicBottomSheet(
         setDownArrowButton()
         setThankYouLayout()
         setAdapter()
+        setInputLayoutBorderColor()
         setSubmitButton()
         setScrollListener()
     }
@@ -155,6 +156,11 @@ class ReviewRelicBottomSheet(
         }
     }
 
+    private fun setInputLayoutBorderColor() {
+        binding.tilReview.setBoxStrokeColorStateList(getTextInputLayoutBorderColor(viewModel.selectedColor))
+        binding.tilReview.counterTextColor = getTextInputLayoutBorderColor(viewModel.selectedColor)
+        binding.tilReview.hintTextColor = getTextInputLayoutBorderColor(viewModel.selectedColor)
+    }
 
     private fun setSubmitButton() {
         context?.let {
@@ -247,8 +253,8 @@ class ReviewRelicBottomSheet(
 
 data class ReviewRelicBottomSheetInputs(
     /**
-    * Title you want to show (will override the title set on admin panel)
-    */
+     * Title you want to show (will override the title set on admin panel)
+     */
     val title: String? = null,
     /**
      * Subtitle  you want to show (will override the subtitle set on admin panel)

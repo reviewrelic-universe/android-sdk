@@ -119,3 +119,21 @@ fun hmacEncryption(str: String, secret: String): String {
     sha256Hmac.init(secretKey)
     return Hex.encodeHexString(sha256Hmac.doFinal(str.toByteArray()))
 }
+
+fun getTextInputLayoutBorderColor(selectedColor: Int?): ColorStateList {
+    val color = selectedColor ?: Color.WHITE
+    val states = arrayOf(
+        intArrayOf(android.R.attr.state_focused),
+        intArrayOf(android.R.attr.state_hovered),
+        intArrayOf(android.R.attr.state_enabled),
+        intArrayOf()
+    )
+
+    val colors = intArrayOf(
+        color,
+        color,
+        color,
+        Color.GRAY
+    )
+    return ColorStateList(states, colors)
+}

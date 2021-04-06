@@ -131,34 +131,49 @@
                     android:orientation="horizontal"
                     android:padding="10dp"
                     app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"
-                    app:layout_constraintBottom_toTopOf="@+id/editTextReview"
+                    app:layout_constraintBottom_toTopOf="@+id/tilReview"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHeight_default="wrap"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textViewSubTitle"
                     tools:listitem="@layout/review_item_layout" />
 
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/editTextReview"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilReview"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="@dimen/review_relic_bottom_sheet_spacing_double"
+                    android:layout_marginEnd="10dp"
                     android:layout_marginBottom="20dp"
-                    android:background="@drawable/review_text_bg"
-                    android:fontFamily="@font/poppins_light"
-                    android:gravity="top|start"
                     android:hint="@string/review"
-                    android:inputType="textMultiLine"
-                    android:lines="2"
-                    android:maxLines="2"
-                    android:padding="10dp"
-                    android:text="@={viewModel.comments}"
-                    android:textColor="@android:color/black"
-                    android:textColorHint="@color/grey_border_color"
-                    android:textSize="18sp"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="1000"
                     app:layout_constraintBottom_toTopOf="@+id/buttonSubmitReview"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/editTextReview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins_light"
+                        android:gravity="top|start"
+                        android:hint="@string/review"
+                        android:inputType="textMultiLine"
+                        android:lines="2"
+                        android:maxLength="1000"
+                        android:maxLines="2"
+                        android:padding="10dp"
+                        android:text="@={viewModel.comments}"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="@color/grey_border_color"
+                        android:textCursorDrawable="@null"
+                        android:textSize="18sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
 
                 <androidx.appcompat.widget.AppCompatButton
