@@ -117,7 +117,8 @@ class ReviewRelicBottomSheet(
             reviewRelicBottomSheetInputs?.image
         }
 
-        binding.settings = ReviewRelicBottomSheetInputs(title, subtitle, image)
+        viewModel.reviewRelicBottomSheetInputs =
+            ReviewRelicBottomSheetInputs(title, subtitle, image)
         binding.executePendingBindings()
 
     }
@@ -179,7 +180,9 @@ class ReviewRelicBottomSheet(
                 binding.groupLoading.visibility = View.VISIBLE
                 ReviewRelic.submitReview(
                     viewModel.getBodyForSubmit(),
-                    viewModel.comments.value
+                    viewModel.comments.value,
+                    viewModel.reviewRelicBottomSheetInputs.title,
+                    viewModel.reviewRelicBottomSheetInputs.subtitle
                 ) {
                     showThankYouLayout()
                 }
@@ -204,20 +207,12 @@ class ReviewRelicBottomSheet(
         animatedVectorDrawable.start()
     }
 
-    private fun setLogo() {
-        binding.imageViewLogo.setImageBitmap(getBitmapFromBase64(ReviewRelic.reviewRelicSettings?.settings?.appLogo))
-    }
-
     private fun setScrollListener() {
         binding.nestedScroll.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { _, _, _, _, _ ->
             if (binding.nestedScroll.getChildAt(0).bottom > (binding.nestedScroll.height + binding.nestedScroll.scrollY)) {
                 binding.ivArrowDown.visibility = View.GONE
             }
         })
-    }
-
-    private fun setTitle() {
-
     }
 
     // endregion

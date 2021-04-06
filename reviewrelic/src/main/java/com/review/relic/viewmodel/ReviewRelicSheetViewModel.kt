@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.JsonObject
 import com.review.relic.ReviewRelic
+import com.review.relic.ui.ReviewRelicBottomSheetInputs
 import com.review.relic.utils.getUnixTimePlus5min
 
 class ReviewRelicSheetViewModel : ViewModel() {
@@ -14,6 +15,7 @@ class ReviewRelicSheetViewModel : ViewModel() {
     var thankYouMessage: String? = null
     var comments: MutableLiveData<String> = MutableLiveData()
     var checkedPosition: Int = -1
+    lateinit var reviewRelicBottomSheetInputs : ReviewRelicBottomSheetInputs
 
     init {
         selectedColor = ReviewRelic.reviewRelicSettings?.settings?.color?.let { colorString ->

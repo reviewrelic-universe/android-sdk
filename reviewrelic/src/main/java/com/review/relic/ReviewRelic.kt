@@ -167,10 +167,14 @@ object ReviewRelic {
     fun submitReview(
         jsonObject: JsonObject,
         comment: String?,
+        title: String?,
+        subtitle: String?,
         callback: (ReviewRelicSubmitResponse?) -> Unit
     ) {
         val jsonBody = jsonObject.deepCopy()
         jsonBody.addProperty("comments", comment)
+        jsonBody.addProperty("title", title)
+        jsonBody.addProperty("subtitle", subtitle)
         reviewRelicService?.submitReview(
             bearerToken = "Bearer $token",
             jsonObject = jsonBody,

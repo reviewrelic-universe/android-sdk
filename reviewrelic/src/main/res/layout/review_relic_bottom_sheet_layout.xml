@@ -6,11 +6,6 @@
 
     <data>
 
-
-        <variable
-            name="settings"
-            type="com.review.relic.ui.ReviewRelicBottomSheetInputs" />
-
         <variable
             name="thankYouMessage"
             type="String" />
@@ -88,7 +83,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
-                        app:sheetImage="@{settings.image}" />
+                        app:sheetImage="@{viewModel.reviewRelicBottomSheetInputs.image}" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -99,7 +94,7 @@
                     android:layout_marginTop="@dimen/review_relic_bottom_sheet_spacing"
                     android:fontFamily="@font/poppins_bold"
                     android:gravity="center"
-                    android:text="@{settings.title}"
+                    android:text="@{viewModel.reviewRelicBottomSheetInputs.title}"
                     android:textColor="@android:color/black"
                     android:textSize="22sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -116,7 +111,7 @@
                     android:fontFamily="@font/poppins_light"
                     android:gravity="center"
                     android:maxLines="2"
-                    android:text="@{settings.subtitle}"
+                    android:text="@{viewModel.reviewRelicBottomSheetInputs.subtitle}"
                     android:textSize="15sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
