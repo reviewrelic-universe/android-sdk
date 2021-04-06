@@ -6,9 +6,10 @@
 
     <data>
 
+
         <variable
             name="settings"
-            type="com.review.relic.dto.ReviewRelicSettingsResponse" />
+            type="com.review.relic.ui.ReviewRelicBottomSheetInputs" />
 
         <variable
             name="thankYouMessage"
@@ -86,7 +87,8 @@
                         android:id="@+id/imageViewLogo"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scaleType="centerCrop" />
+                        android:scaleType="centerCrop"
+                        app:sheetImage="@{settings.image}" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -97,7 +99,7 @@
                     android:layout_marginTop="@dimen/review_relic_bottom_sheet_spacing"
                     android:fontFamily="@font/poppins_bold"
                     android:gravity="center"
-                    android:text="@{settings.name}"
+                    android:text="@{settings.title}"
                     android:textColor="@android:color/black"
                     android:textSize="22sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -110,13 +112,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/review_relic_bottom_sheet_spacing"
+                    android:ellipsize="end"
                     android:fontFamily="@font/poppins_light"
                     android:gravity="center"
-                    android:text="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."
+                    android:maxLines="2"
+                    android:text="@{settings.subtitle}"
                     android:textSize="15sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
+                    app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
+                    tools:text="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout." />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerViewItems"

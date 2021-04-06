@@ -6,6 +6,7 @@ import com.google.gson.JsonObject
 import com.review.relic.dto.ReviewRelicSettingsResponse
 import com.review.relic.dto.ReviewRelicSubmitResponse
 import com.review.relic.ui.ReviewRelicBottomSheet
+import com.review.relic.ui.ReviewRelicBottomSheetInputs
 import com.review.relic.utils.hmacEncryption
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -26,7 +27,7 @@ object ReviewRelic {
 
     private var reviewRelicService: ReviewRelicService? = null
 
-    var reviewRelicSettings: ReviewRelicSettingsResponse? = null
+    var reviewRelicSettings: ReviewRelicSettingsResponse.ReviewRelicDataResponse? = null
     var onInitializedListener: ReviewRelicOnInitializedListener? = null
 
     /**
@@ -128,7 +129,7 @@ object ReviewRelic {
                 ) {
                     if (response.isSuccessful) {
                         val body = response.body()
-                        reviewRelicSettings = body
+                        reviewRelicSettings = body?.dataResponse
                         onInitializedListener?.onInitializationComplete(true)
                     } else {
                         onInitializedListener?.onInitializationComplete(false)
@@ -149,11 +150,13 @@ object ReviewRelic {
 
     fun showSheet(
         transactionId: String? = null, thankYouMessage: String? = null,
+        reviewRelicBottomSheetInputs: ReviewRelicBottomSheetInputs? = null,
         fragmentManager: FragmentManager
     ) {
         ReviewRelicBottomSheet(
             transactionId = transactionId,
-            thankYouMessage = thankYouMessage
+            thankYouMessage = thankYouMessage,
+            reviewRelicBottomSheetInputs = reviewRelicBottomSheetInputs
         ) {
         }.show(
             fragmentManager,

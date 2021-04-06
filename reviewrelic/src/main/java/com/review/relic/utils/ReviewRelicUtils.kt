@@ -28,9 +28,19 @@ fun getBitmapFromBase64(base64String: String?): Bitmap? {
     }
 }
 
-@BindingAdapter("bind:imageBitmap")
-fun loadImage(iv: ImageView, bitmap: Bitmap?) {
-    iv.setImageBitmap(bitmap)
+@BindingAdapter("sheetImage")
+fun loadImage(view: ImageView?, reviewRelicImage: ReviewRelicImage?) {
+    reviewRelicImage?.let {
+        when (it.type) {
+            ImageType.ResourceId -> {
+                view?.setImageResource(reviewRelicImage.image as Int)
+            }
+            ImageType.Base64 -> {
+                view?.setImageBitmap(getBitmapFromBase64(reviewRelicImage.image as String?))
+            }
+        }
+    }
+
 }
 
 fun Drawable.overrideColor(@ColorInt colorInt: Int) {
@@ -73,6 +83,7 @@ fun getButtonSelectorDrawable(
 }
 
 fun getButtonSelectorColor(context: Context, selectedColor: Int?): ColorStateList {
+    val color = selectedColor ?: Color.WHITE
     return ColorStateList(
         arrayOf(
             intArrayOf(android.R.attr.state_enabled),
@@ -81,8 +92,7 @@ fun getButtonSelectorColor(context: Context, selectedColor: Int?): ColorStateLis
         ),
         intArrayOf(
             ContextCompat.getColor(context, android.R.color.white),
-            selectedColor!!,
-            selectedColor
+            color, color
         )
     )
 }

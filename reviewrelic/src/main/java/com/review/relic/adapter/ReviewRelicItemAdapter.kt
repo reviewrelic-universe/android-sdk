@@ -14,25 +14,26 @@ import com.review.relic.utils.overrideColor
 
 
 class ReviewRelicItemAdapter(
-    val context: Context,
-    val showImage: Boolean? = false,
-    val emptyBitmap: Bitmap?,
-    val filledBitmap: Bitmap?,
-    val selectedColor: Int?,
-    val callBack: (Int) -> Unit
+    private val context: Context,
+    private val showImage: Boolean? = false,
+    private val emptyBitmap: Bitmap?,
+    private val filledBitmap: Bitmap?,
+    private val selectedColor: Int?,
+    private val callBack: (Int) -> Unit
 ) :
-    DataBoundListAdapter<ReviewRelicSettingsResponse.ReviewSetting, ReviewItemLayoutBinding>(
-        object : DiffUtil.ItemCallback<ReviewRelicSettingsResponse.ReviewSetting>() {
+    DataBoundListAdapter<ReviewRelicSettingsResponse.ReviewRelicDataResponse.ReviewSetting, ReviewItemLayoutBinding>(
+        object :
+            DiffUtil.ItemCallback<ReviewRelicSettingsResponse.ReviewRelicDataResponse.ReviewSetting>() {
             override fun areItemsTheSame(
-                oldItem: ReviewRelicSettingsResponse.ReviewSetting,
-                newItem: ReviewRelicSettingsResponse.ReviewSetting
+                oldItem: ReviewRelicSettingsResponse.ReviewRelicDataResponse.ReviewSetting,
+                newItem: ReviewRelicSettingsResponse.ReviewRelicDataResponse.ReviewSetting
             ): Boolean {
                 return oldItem == newItem
             }
 
             override fun areContentsTheSame(
-                oldItem: ReviewRelicSettingsResponse.ReviewSetting,
-                newItem: ReviewRelicSettingsResponse.ReviewSetting
+                oldItem: ReviewRelicSettingsResponse.ReviewRelicDataResponse.ReviewSetting,
+                newItem: ReviewRelicSettingsResponse.ReviewRelicDataResponse.ReviewSetting
             ): Boolean {
                 return oldItem == newItem
             }
@@ -52,7 +53,7 @@ class ReviewRelicItemAdapter(
 
     override fun bind(
         binding: ReviewItemLayoutBinding,
-        item: ReviewRelicSettingsResponse.ReviewSetting,
+        item: ReviewRelicSettingsResponse.ReviewRelicDataResponse.ReviewSetting,
         position: Int
     ) {
 

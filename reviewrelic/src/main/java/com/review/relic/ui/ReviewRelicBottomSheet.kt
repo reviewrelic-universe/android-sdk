@@ -31,6 +31,7 @@ import com.review.relic.viewmodel.ReviewRelicSheetViewModel
 class ReviewRelicBottomSheet(
     private var transactionId: String? = null,
     private var thankYouMessage: String? = null,
+    private var reviewRelicBottomSheetInputs: ReviewRelicBottomSheetInputs? = null,
     private val onSubmitCallback: (() -> Unit)? = null
 ) : BottomSheetDialogFragment() {
 
@@ -87,18 +88,37 @@ class ReviewRelicBottomSheet(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.settings = ReviewRelic.reviewRelicSettings
-        binding.executePendingBindings()
+        setUpSheetInputs()
 
         isCancelable = ReviewRelic.reviewRelicSettings?.settings?.canSkip ?: true
 
         setCrossButton()
         setDownArrowButton()
-        setLogo()
         setThankYouLayout()
         setAdapter()
         setSubmitButton()
         setScrollListener()
+    }
+
+    private fun setUpSheetInputs() {
+
+        val title = if (reviewRelicBottomSheetInputs?.title.isNullOrEmpty()) {
+            ReviewRelic.reviewRelicSettings?.name
+        } else {
+            reviewRelicBottomSheetInputs?.title
+        }
+
+        val subtitle = reviewRelicBottomSheetInputs?.subtitle
+
+        val image = if (reviewRelicBottomSheetInputs?.image == null) {
+            ReviewRelicImage(ReviewRelic.reviewRelicSettings?.settings?.appLogo, ImageType.Base64)
+        } else {
+            reviewRelicBottomSheetInputs?.image
+        }
+
+        binding.settings = ReviewRelicBottomSheetInputs(title, subtitle, image)
+        binding.executePendingBindings()
+
     }
 
     // endregion
@@ -190,6 +210,10 @@ class ReviewRelicBottomSheet(
         })
     }
 
+    private fun setTitle() {
+
+    }
+
     // endregion
 
     //region Set Adapter
@@ -220,3 +244,18 @@ class ReviewRelicBottomSheet(
 
     //endregion
 }
+
+data class ReviewRelicBottomSheetInputs(
+    /**
+    * Title you want to show (will override the title set on admin panel)
+    */
+    val title: String? = null,
+    /**
+     * Subtitle  you want to show (will override the subtitle set on admin panel)
+     */
+    val subtitle: String? = null,
+    /**
+     * Icon you want to show (will override the icon set on admin panel)
+     */
+    val image: ReviewRelicImage? = null,
+)

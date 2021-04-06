@@ -15,7 +15,10 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.review.relic.adapter.DataBoundViewHolder
 import com.review.relic.databinding.ReviewItemLayoutBinding
 import com.review.relic.ui.ReviewRelicBottomSheet
+import com.review.relic.ui.ReviewRelicBottomSheetInputs
 import com.review.relic.ui.TestActivity
+import com.review.relic.utils.ImageType
+import com.review.relic.utils.ReviewRelicImage
 import org.hamcrest.CoreMatchers.not
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers
@@ -31,6 +34,11 @@ class ReviewRelicBottomSheetTest {
 
     private val thankYouMessage = "" //TODO:/*Test Thank you message*/
     private val transactionId = "" //TODO:/*Test Transaction Id*/
+
+    private val reviewRelicBottomSheetInputs = ReviewRelicBottomSheetInputs(
+        title = "Test Title", //TODO: /*Test title*/
+        subtitle = "Test Subtitle goes here", //TODO: /*Test subtitle*/
+    )
 
     @Before
     fun setUp() {
@@ -52,6 +60,7 @@ class ReviewRelicBottomSheetTest {
             ReviewRelic.showSheet(
                 transactionId = transactionId,
                 thankYouMessage = thankYouMessage,
+                reviewRelicBottomSheetInputs = reviewRelicBottomSheetInputs,
                 fragmentManager = it.supportFragmentManager
             )
         }
@@ -60,12 +69,8 @@ class ReviewRelicBottomSheetTest {
     @Test
     fun testSubmitWithoutReviewSelect() {
         Thread.sleep(5000)
-        onView(withId(R.id.textViewTitle)).check(matches(withText(ReviewRelic.reviewRelicSettings?.name)))
-        onView(withId(R.id.recyclerViewItems)).check(
-            RecyclerViewItemCountAssertion(
-                ReviewRelic.reviewRelicSettings?.reviewSettings?.count() ?: 0
-            )
-        )
+        testRecyclerViewAndTexts()
+
         if (ReviewRelic.reviewRelicSettings?.settings?.shouldShowImages == true)
             onView(
                 RecyclerViewMatcher(R.id.recyclerViewItems)
@@ -98,12 +103,8 @@ class ReviewRelicBottomSheetTest {
     @Test
     fun testSubmitWithReviewSelect() {
         Thread.sleep(5000)
-        onView(withId(R.id.textViewTitle)).check(matches(withText(ReviewRelic.reviewRelicSettings?.name)))
-        onView(withId(R.id.recyclerViewItems)).check(
-            RecyclerViewItemCountAssertion(
-                ReviewRelic.reviewRelicSettings?.reviewSettings?.count() ?: 0
-            )
-        )
+        testRecyclerViewAndTexts()
+
         onView(withId(R.id.recyclerViewItems)).perform(
             actionOnItemAtPosition<DataBoundViewHolder<ReviewItemLayoutBinding>>(
                 (0..(ReviewRelic.reviewRelicSettings?.reviewSettings?.count() ?: 0)).random(),
@@ -119,6 +120,21 @@ class ReviewRelicBottomSheetTest {
         onView(withId(R.id.textViewThankYou)).check(matches(withText(thankYouMessage)))
     }
 
+    fun testRecyclerViewAndTexts() {
+        onView(withId(R.id.recyclerViewItems)).check(
+            RecyclerViewItemCountAssertion(
+                ReviewRelic.reviewRelicSettings?.reviewSettings?.count() ?: 0
+            )
+        )
+        reviewRelicBottomSheetInputs.title?.let {
+            onView(withId(R.id.textViewTitle)).check(matches(withText(it)))
+        }
+            ?: onView(withId(R.id.textViewTitle)).check(matches(withText(ReviewRelic.reviewRelicSettings?.name)))
+
+        reviewRelicBottomSheetInputs.subtitle?.let {
+            onView(withId(R.id.textViewSubTitle)).check(matches(withText(it)))
+        }
+    }
 
     // scroll-to action that also works with NestedScrollViews
     class BetterScrollToAction : ViewAction by ScrollToAction() {

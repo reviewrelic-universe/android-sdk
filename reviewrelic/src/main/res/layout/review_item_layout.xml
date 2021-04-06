@@ -10,7 +10,7 @@
 
         <variable
             name="reviewRelicItem"
-            type="com.review.relic.dto.ReviewRelicSettingsResponse.ReviewSetting" />
+            type="com.review.relic.dto.ReviewRelicSettingsResponse.ReviewRelicDataResponse.ReviewSetting" />
 
         <variable
             name="isSelected"
