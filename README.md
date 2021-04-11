@@ -24,7 +24,7 @@ Add the dependency
 
 ```Gradle
 dependencies {
-        implementation 'com.github.reviewrelic-universe:android-sdk:1.0.0'
+        implementation 'com.github.reviewrelic-universe:android-sdk:1.0.1'
 }
 ```
 
