@@ -15,7 +15,7 @@ class ReviewRelicSheetViewModel : ViewModel() {
     var thankYouMessage: String? = null
     var comments: MutableLiveData<String> = MutableLiveData()
     var checkedPosition: Int = -1
-    lateinit var reviewRelicBottomSheetInputs : ReviewRelicBottomSheetInputs
+    lateinit var reviewRelicBottomSheetInputs: ReviewRelicBottomSheetInputs
 
     init {
         selectedColor = ReviewRelic.reviewRelicSettings?.settings?.color?.let { colorString ->
@@ -26,11 +26,12 @@ class ReviewRelicSheetViewModel : ViewModel() {
     fun getBodyForSubmit(): JsonObject {
         return JsonObject().apply {
             transactionId?.let {
-                addProperty("transaction-id", it)
+                if (it.isNotEmpty())
+                    addProperty("transaction-id", it)
             }
             addProperty(
-                "rating",
-                ReviewRelic.reviewRelicSettings?.reviewSettings?.get(checkedPosition)?.value
+                    "rating",
+                    ReviewRelic.reviewRelicSettings?.reviewSettings?.get(checkedPosition)?.value
             )
             addProperty("time", getUnixTimePlus5min())
         }
