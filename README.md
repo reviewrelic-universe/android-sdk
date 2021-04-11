@@ -73,6 +73,11 @@ ReviewRelic.showSheet(
     transactionId = "",  /*Test Transaction Id*/
     thankYouMessage = "", /*Test Thank you message*/
     fragmentManager = , /* Pass fragment manager from your Activity/Fragment */
+    reviewRelicBottomSheetInputs = ReviewRelicBottomSheetInputs(
+                    title = "", //TODO: /*Title you want to show (will override the title set on admin panel)*/
+                    subtitle = "", //TODO: /*Subtitle  you want to show (will override the subtitle set on admin panel)*/
+                    image = null //TODO: /*Icon you want to show (will override the icon set on admin panel)*/
+                ),
     onSubmitCallback = {} /* Callback for successfully submitting review */
 )
 ```
@@ -84,6 +89,7 @@ Following are parameters the details for showing sheet:
 |:---|:---|:---|:---|:---|
 | transactionId | Transaction Id for your review | String | No | null
 | thankYouMessage | Thank you message you want to show  | String | No | "Thank you" |
+| reviewRelicBottomSheetInputs | BottomSheet inputs user can override  | com.review.relic.ui.ReviewRelicBottomSheetInputs | No | null |
 | fragmentManager | Pass fragment manager from your Activity/Fragment | FragmentManager | Yes | Should be non-null |
 | onSubmitCallback | Callback for successfully submitting review | | No
 
