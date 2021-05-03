@@ -1,5 +1,5 @@
 # Review Relic Android Sdk
-You can create your app on [Review Relic Admin Panel](https://reviewrelic.com/)
+You can create your app on [Review Relic Web portal](https://reviewrelic.com/)
 
 ## Installation
 
@@ -46,9 +46,9 @@ To initialize the Review Relic SDK in your app, use below snippet in your app's 
 
 ```kotlin
 ReviewRelic
-    .setSecretKey("") /* Secret key obtained from admin panel of review relic */
-    .setToken("") /* Token obtained from admin panel of review relic */
-    .setMerchantId("") /* Merchant Id obtained from admin panel of review relic */
+    .setSecretKey("") /* Secret key obtained from Web portal of review relic */
+    .setToken("") /* Token obtained from Web portal of review relic */
+    .setMerchantId("") /* Merchant Id obtained from Web portal of review relic */
     .enableLogging() /* Set to true if you want to see logs */
     .setInitializeListener() /* Callback for successful initialization of SDK */
     .build()
@@ -70,26 +70,46 @@ Following are functions you need to call for SDK initialization:
 
 ```kotlin
 ReviewRelic.showSheet(
-    transactionId = "",  /*Test Transaction Id*/
-    thankYouMessage = "", /*Test Thank you message*/
+    transactionId = "",  /*Transaction Id*/
+    thankYouMessage = "", /*Thank you message*/
     fragmentManager = , /* Pass fragment manager from your Activity/Fragment */
     reviewRelicBottomSheetInputs = ReviewRelicBottomSheetInputs(
-                    title = "", //TODO: /*Title you want to show (will override the title set on admin panel)*/
-                    subtitle = "", //TODO: /*Subtitle  you want to show (will override the subtitle set on admin panel)*/
-                    image = null //TODO: /*Icon you want to show (will override the icon set on admin panel)*/
+                    title = "", /*Title you want to show (will override the title set on Web portal)*/
+                    subtitle = "", /*Subtitle  you want to show (will override the subtitle set on Web portal)*/
+                    image = null /*Icon you want to show (will override the icon set on Web portal)*/
                 ),
     onSubmitCallback = {} /* Callback for successfully submitting review */
 )
 ```
 ###### Attributes
 
-Following are parameters the details for showing sheet:
+Following are the parameters details for showing sheet:
 
 | Parameters  |  Description | Type | Required | Default value |
 |:---|:---|:---|:---|:---|
 | transactionId | Transaction Id for your review | String | No | null
 | thankYouMessage | Thank you message you want to show  | String | No | "Thank you" |
-| reviewRelicBottomSheetInputs | BottomSheet inputs user can override  | com.review.relic.ui.ReviewRelicBottomSheetInputs | No | null |
+| reviewRelicBottomSheetInputs | BottomSheet inputs user can override (See table for detailed attributes)  | com.review.relic.ui.ReviewRelicBottomSheetInputs | No | null |
 | fragmentManager | Pass fragment manager from your Activity/Fragment | FragmentManager | Yes | Should be non-null |
 | onSubmitCallback | Callback for successfully submitting review | | No
+
+###### ReviewRelicBottomSheetInputs Attributes
+
+Following are the parameters details for ReviewRelicBottomSheetInputs class:
+
+| Parameters  |  Description | Type | Required | Default value |
+|:---|:---|:---|:---|:---|
+| title | Title you want to show (will override the title set on Web portal) | String | No | null
+| subtitle | Subtitle  you want to show (will override the subtitle set on Web portal)  | String | No | null |
+| image | Icon you want to show (will override the icon set on Web portal) | com.review.relic.utils.ReviewRelicImage | No | null |
+
+###### ReviewRelicImage Attributes
+
+Following are the parameters details for ReviewRelicImage class:
+
+| Parameters  |  Description | Type | Required | Default value |
+|:---|:---|:---|:---|:---|
+| image | Image ResourceId (Drawable Int) or Base64 (String)  | Any | No | null
+| type | ImageType (ResourceId,Bas64)  from com.review.relic.utils.ImageType Enum  | com.review.relic.utils.ImageType | No | null |
+
 
