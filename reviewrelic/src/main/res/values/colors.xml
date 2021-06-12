@@ -2,4 +2,5 @@
 <resources>
     <color name="grey_border_color">#DBDBDB</color>
     <color name="default_color">#441AB8</color>
+    <color name="text_color">#858282</color>
 </resources>

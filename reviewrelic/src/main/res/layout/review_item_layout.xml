@@ -61,9 +61,9 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageViewReview"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_margin="10dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_margin="7dp"
             android:visibility="@{showImage ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

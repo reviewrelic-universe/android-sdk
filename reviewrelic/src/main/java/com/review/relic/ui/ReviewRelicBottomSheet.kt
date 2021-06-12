@@ -131,6 +131,7 @@ class ReviewRelicBottomSheet(
         viewModel.selectedColor?.let {
             binding.imageViewAnimation.setColorFilter(it, PorterDuff.Mode.SRC_IN)
             binding.circularProgress.setIndeterminateTintCompat(it)
+            binding.textViewThankYou.setTextColor(it)
         }
         binding.thankYouMessage = thankYouMessage
     }

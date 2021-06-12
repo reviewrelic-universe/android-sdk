@@ -108,6 +108,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/review_relic_bottom_sheet_spacing"
                     android:ellipsize="end"
+                    android:textColor="@color/text_color"
                     android:fontFamily="@font/poppins_light"
                     android:gravity="center"
                     android:maxLines="2"
