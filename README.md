@@ -1,6 +1,8 @@
 # Review Relic Android Sdk
 You can create your app on [Review Relic Web portal](https://reviewrelic.com/)
 
+<img src="screenshots/with_image.gif" width="250">  <img src="screenshots/with_text.gif" width="250">
+
 ## Installation
 
 Review Relic for Android supports API 16 and above.
